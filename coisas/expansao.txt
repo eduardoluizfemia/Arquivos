@@ -1,0 +1,44 @@
+ mRender: function (o, val, objeto) {
+                    var valor = '';
+                    if (objeto.NomeContribuinte.length > 18) {
+                        valor += '<input type="hidden" value="' + SF_GERAL.htmlEscape(objeto.NomeContribuinte) + '" class="textoOriginal" />';
+                        valor += '<input type="hidden" value="' + SF_GERAL.htmlEscape(objeto.NomeContribuinte).substr(0, 15) + '..." class="textoLimitado" />';
+                        
+                        valor += '<span class="texto">' + SF_GERAL.htmlEscape(objeto.NomeContribuinte).substr(0, 15) + '...</span>';
+                        valor += '<a href="javascript:;" onclick="PESQUISAR.trocarTextoNomeContribuinte(this)"><img src="' + ROOT_URL + 'content/img/expandir-retrair.png" alt="Expandir" title="Expandir"></a>';
+
+                    } else {
+                        valor = SF_GERAL.htmlEscape(objeto.NomeContribuinte);
+                    }
+
+                    return valor;
+                }
+            },
+
+
+
+
+
+var PESQUISAR = {
+    trocarTextoNomeContribuinte: function (link) {
+        var td = $(link).parent();
+        var img = $(td).find('img');
+
+        if ($(img).attr('alt') == 'Expandir') {
+            $(img).attr('alt', 'Retrair').attr('title', 'Retrair').attr('src', ROOT_URL + 'content/img/retrair.png');
+            $(td).find('.texto').text($(td).find('.textoOriginal').val());
+        } else {
+            $(img).attr('alt', 'Expandir').attr('title', 'Expandir').attr('src', ROOT_URL + 'content/img/expandir-retrair.png');
+            $(td).find('.texto').text($(td).find('.textoLimitado').val());
+        }
+    }
+}
+
+
+
+
+    function removeEspacos() {
+        $('input[type=text]').each(function () {
+            $(this).val($(this).val().trim());
+        });
+    }

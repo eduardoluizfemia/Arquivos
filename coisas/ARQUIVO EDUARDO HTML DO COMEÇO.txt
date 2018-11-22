@@ -1,0 +1,201 @@
+﻿function comboTipoPessoa() {
+        var tamanho = documentoContribuinte.val().length;
+        if (tamanho == 11) {
+            codigoTipoPessoa.val("1");
+        } else if (tamanho == 14) {
+            codigoTipoPessoa.val("2");
+        } else if (tamanho == 15) {
+            codigoTipoPessoa.val("3");
+        }
+        mascaraDocumento(codigoTipoPessoa.val());
+
+        codigoTipoPessoa.change(function () {
+            $('#txtDocumentoContribuinte').inputmask('remove');
+            $('#txtPADocumentoContribuinte').inputmask('remove');
+            $('#txtDocumentoContribuinte').val('');
+            $('#txtPADocumentoContribuinte').val('');
+            $('#txtDocumentoContribuinte').removeClass('cpf');
+            $('#txtPADocumentoContribuinte').removeClass('cpf');
+            $('#txtDocumentoContribuinte').removeClass('cnpj');
+            $('#txtPADocumentoContribuinte').removeClass('cnpj');
+            mascaraDocumento(tipoPessoa.val());
+        });
+    }
+
+    function mascaraDocumento(valor) {
+        if (valor == "1") {
+            $('#txtDocumentoContribuinte').inputmask("999.999.999-99");
+            $('#txtPADocumentoContribuinte').inputmask("999.999.999-99");
+            documentoContribuinte.addClass('cpf');
+        } else if (valor == "2") {
+            $('#txtDocumentoContribuinte').inputmask("99.999.999/9999-99");
+            $('#txtPADocumentoContribuinte').inputmask("99.999.999/9999-99");
+            documentoContribuinte.addClass('cnpj');
+        } else if (valor == "3") {
+            $('#txtDocumentoContribuinte').inputmask("999999999999999");
+            $('#txtPADocumentoContribuinte').inputmask("999999999999999");
+        }
+        $('#txtDocumentoContribuinte').attr('readonly', valor == "");
+        $('#txtPADocumentoContribuinte').attr('readonly', valor == "");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('#mascara-pessoa').data('data_campo_contribuinte');
+        $('.mascara-pessoa').each(function () {
+            $($(this).data('data_campo_contribuinte'))
+        });
+
+
+
+
+
+
+
+
+
+
+
+ function montarTabela(sePesquisa) {
+        var ordenacao = localStorage.getItem(dadosSessao) == null ? [[0, 'asc']] : [[JSON.parse(localStorage.getItem(dadosSessao)).order[0].column, JSON.parse(localStorage.getItem(dadosSessao)).order[0].dir]];
+        castDatatable.criarTabela({
+            idTabela: model.IdTabela,
+            controller: "CashPower",
+            action: "ConsultarCashPower",
+            order: ordenacao,
+            method: 'POST',
+            fnAdicionarDados: function (data) {
+                var formulario = [];
+                if ($('#pesquisaAvancada').is(':checked')) {
+                    formulario.push({ name: 'Instalacao', value: instalacao.val() });
+                    formulario.push({ name: 'DataIncidencia', value: dataIncidencia.val() });
+                    formulario.push({ name: 'ConsumoKwh', value: consumoKwh.val() });
+                    formulario.push({ name: 'CodigoTipoContrato', value: codigoTipoContrato.val() });
+                    formulario.push({ name: 'CodigoContrato', value: codigoContrato.val() });
+                    formulario.push({ name: 'DataInicioVigencia', value: dataInicioVigencia.val() });
+                    formulario.push({ name: 'DataFimVigencia', value: dataFimVigencia.val() });
+                    formulario.push({ name: 'CodigoTipoPessoa', value: codigoTipoPessoa.val() });
+                    formulario.push({ name: 'DocumentoContribuinte', value: documentoContribuinte.val() });
+                    formulario.push({ name: 'NomeContribuinte', value: nomeContribuinte.val() });
+                    formulario.push({ name: 'DataInicioCashPower', value: dataInicioCashPower.val() });
+                    formulario.push({ name: 'DataDesligamentoCashPower', value: dataDesligamentoCashPower.val() });
+                    formulario.push({ name: 'Endereco.TipoLogradouro', value: tipoLogradouro.val() });
+                    formulario.push({ name: 'Endereco.TipoPreposicaoEndereco', value: tipoPreposicaoEndereco.val() });
+                    formulario.push({ name: 'Endereco.TipoTituloLogradouro', value: tipoTituloLogradouro.val() });
+                    formulario.push({ name: 'EnderecoNome', value: enderecoNome.val() });
+                    formulario.push({ name: 'Endereco.Numero', value: enderecoNumero.val() });
+                    formulario.push({ name: 'Endereco.Estado', value: enderecoEstado.val() });
+                    formulario.push({ name: 'Endereco.Complemento', value: enderecoComplemento.val() });
+                    formulario.push({ name: 'Endereco.Bairro', value: enderecoBairro.val() });
+                    formulario.push({ name: 'Endereco.Municipio', value: enderecoMunicipio.val() });
+                    formulario.push({ name: 'EnderecoCep', value: enderecoCep.val() });
+                    formulario.push({ name: 'CompraRecarga', value: compraRecarga.val() });
+                    formulario.push({ name: 'DataCompraRecarga', value: dataCompraRecarga.val() });
+                    formulario.push({ name: 'Classe', value: classe.val() });
+                    formulario.push({ name: 'SeImportacao', value: importacao.is(':checked') });
+                    formulario.push({ name: 'SeCadastro', value: cadastro.  is(':checked') });
+                    data.Entidade = SF_GERAL.converterParaObjeto(formulario);
+                }
+                else {
+                    formulario.push({ name: 'Instalacao', value: instalacao.val() });
+                    formulario.push({ name: 'DataIncidencia', value: dataIncidencia.val() });
+                    formulario.push({ name: 'CodigoTipoContrato', value: codigoTipoContrato.val() });
+                    formulario.push({ name: 'CodigoTipoPessoa', value: codigoTipoPessoa.val() });
+                    formulario.push({ name: 'DocumentoContribuinte', value: documentoContribuinte.val() });
+                    formulario.push({ name: 'NomeContribuinte', value: nomeContribuinte.val() });
+                    formulario.push({ name: 'Endereco.TipoLogradouro', value: tipoLogradouro.val() });
+                    formulario.push({ name: 'Endereco.TipoPreposicaoEndereco', value: tipoPreposicaoEndereco.val() });
+                    formulario.push({ name: 'Endereco.TipoTituloLogradouro', value: tipoTituloLogradouro.val() });
+                    formulario.push({ name: 'EnderecoNome', value: enderecoNome.val() });
+                    formulario.push({ name: 'Endereco.Numero', value: enderecoNumero.val() });
+                    formulario.push({ name: 'Endereco.Complemento', value: enderecoComplemento.val() });
+                    formulario.push({ name: 'EnderecoCep', value: enderecoCep.val() });
+                    formulario.push({ name: 'Classe', value: classe.val() });
+                    formulario.push({ name: 'SeImportacao', value: importacao.is(':checked') });
+                    formulario.push({ name: 'SeCadastro', value: cadastro.is(':checked') });
+                    data.Entidade = SF_GERAL.converterParaObjeto(formulario);
+                }
+                data.GravarLog = !sePesquisa
+                if (localStorage.getItem(dadosSessao)) {
+                    data.GravarLog = false;
+                    var temp = JSON.parse(localStorage.getItem(dadosSessao));
+                    $('#' + model.IdTabela).DataTable().ajax.params().start = temp.star;
+                    $('#' + model.IdTabela).DataTable().ajax.params().length = temp.length;
+                    $('#' + model.IdTabela).DataTable().ajax.params().order = temp.order;
+                    localStorage.clear();
+                }
+            },
+            columns: [
+            { mData: 'Instalacao', sTitle: 'INSTALAÇÃO', sWidth: '9%' },
+            { mData: 'DataIncidenciaFormatada', sTitle: 'MÊS/ANO INCIDÊNCIA', sWidth: '8%' },
+            { mData: 'TipoContratoDescricao', sTitle: 'CONTRATO', sWidth: '9%' },
+            { mData: 'TipoPessoaDescricao', sTitle: 'TIPO PESSOA', sWidth: '10%' },
+            { mData: 'DocumentoFormatado', sTitle: 'CPF / CNPJ / RANI', sWidth: '11%' },
+            {
+                mData: 'NomeContribuinte', sTitle: 'NOME CONTRIBUINTE', sWidth: '13%',
+                mRender: function (valor, tipo, objeto) {
+                    return valor == undefined ? '' : SF_GERAL.htmlEscape(valor);
+                }
+            },
+            { mData: 'EnderecoNome', sTitle: 'LOGRADOURO', sWidth: '10%' },
+            { mData: 'CepFormatado', sTitle: 'CEP', sWidth: '7%' },
+            { mData: 'ClasseDescricao', sTitle: 'CLASSE', sWidth: '7%' },
+            { mData: 'Origem', sTitle: 'ORIGEM CADASTRO', sWidth: '8%' },
+            {
+                mData: null,
+                sTitle: 'Ação',
+                sWidth: '7%',
+                className: 'text-center',
+                bSortable: false,
+                mRender: function (o, val, objeto) {
+                    var botoes = "";
+                    botoes += '<a onclick="uc012.abrirModalDetalhar(\'' + objeto.Instalacao + '\',\'' + objeto.Origem + '\')"><span class="glyphicon glyphicon-search" alt="Detalhar" title="Detalhar"></a>';
+                    botoes += '<a onclick="uc012.editar(\'' + objeto.Instalacao + '\',\'' + objeto.Origem + '\')" ><img src="content/img/editar.png" alt="Editar" title="Editar"></a> ';
+                    botoes += '<a onclick="uc012.excluir(\'' + objeto.Instalacao + '\',\'' + objeto.Origem + '\')" ><img src="content/img/historico.png" alt="Histórico" title="Histórico"></a> ';
+                    return botoes;
+                }
+            }
+            ]
+        });
+    }
+
+
+var dadosSessao = "dadosPesquisarCashPower";
+    instalacao = $('#pesquisaAvancada').is(':checked') ? $('#txtPAInstalacao') : $('#txtInstalacao');
+    dataIncidencia = $('#pesquisaAvancada').is(':checked') ? $('#txtPAMesAnoIncidencia') : $('#txtMesAnoIncidencia');
+    consumoKwh = $('#txtPAConsumo');
+    codigoContrato = $('#txtPACodigoContrato');
+    codigoTipoContrato = $('#pesquisaAvancada').is(':checked') ? $('#cbPAContrato') : $('#cbContrato');
+    dataInicioVigencia = $('#dtPAData');
+    dataFimVigencia = $('#dtPADataFim');
+    codigoTipoPessoa = $('#pesquisaAvancada').is(':checked') ? $('#cbPATipoPessoa') : $('#cbTipoPessoa');
+    documentoContribuinte = $('#pesquisaAvancada').is(':checked') ? $('#txtPADocumentoContribuinte') : $('#txtDocumentoContribuinte');
+    nomeContribuinte = $('#pesquisaAvancada').is(':checked') ? $('#txtPANomeContribuinte') : $('#txtNomeContribuinte');
+    dataInicioCashPower = $('#dtPADataCash');
+    dataDesligamentoCashPower = $('#dtPADataDesligamento');
+    tipoLogradouro = $('#pesquisaAvancada').is(':checked') ? $('#cbPATipo') : $('#cbTipo');
+    tipoPreposicaoEndereco = $('#pesquisaAvancada').is(':checked') ? $('#cbPAPreposicao') : $('#cbPreposicao');
+    tipoTituloLogradouro = $('#pesquisaAvancada').is(':checked') ? $('#cbPATitulo') : $('#cbTitulo');
+    enderecoNome = $('#pesquisaAvancada').is(':checked') ? $('#txtPANome') : $('#txtNome');
+    enderecoNumero = $('#pesquisaAvancada').is(':checked') ? $('#txtPANumero') : $('#txtNumero');
+    enderecoEstado = $('#pesquisaAvancada').is(':checked') ? $('#cbPAUF') : $('#cbUF');
+    enderecoComplemento = $('#pesquisaAvancada').is(':checked') ? $('#txtPAComplemento') : $('#txtComplemento');
+    enderecoBairro = $('#pesquisaAvancada').is(':checked') ? $('#txtPABairro') : $('#txtBairro');
+    enderecoMunicipio = $('#pesquisaAvancada').is(':checked') ? $('#txtPAMunicipio') : $('#txtMunicipio');
+    enderecoCep = $('#pesquisaAvancada').is(':checked') ? $('#txtPACEP') : $('#txtCEP');
+    compraRecarga = $('#txtPACompra');
+    dataCompraRecarga = $('#dtPADataCompra');
+    classe = $('#pesquisaAvancada').is(':checked') ? $('#cbPAClasse') : $('#cbClasse');
+    importacao = $('#SeImportacao');
+    cadastro = $('#SeCadastro');

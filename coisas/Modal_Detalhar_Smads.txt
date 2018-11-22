@@ -1,0 +1,219 @@
+<form id="modal">
+    <div id="divModaldetalharSmads" class="modal fade" tabindex="-1" data-backdrop="static">
+        <div class="modal-dialog modal-formulario">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="bootbox-close-button close" type="button" data-dismiss="modal" title="Fechar">×</button>
+                    <h4 class="modal-title">Detalhar Baixa Renda</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Instalacao">Instalação</label>
+                                <label id="Instalacao" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Tid">NIS</label>
+                                <label id="Nis" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="NumeroCliente">BPC</label>
+                                <label id="Bpc" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <fieldset>
+                        <legend>Contribuinte</legend>
+
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="DocumentoContribuinte">CPF</label>
+                                <label id="DocumentoContribuinte" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="NomeContribuinte">Nome Contribuinte</label>
+                                <label id="NomeContribuinte" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Isenção</legend>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Classe">Isenção</label>
+                                <label id="Isencao" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="VigenciaIsencao">Vigência da Isenção</label>
+                                <label id="VigenciaIsencao" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Logradouro</legend>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Tipo">Tipo</label>
+                                <label id="Tipo" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Preposicao">Preposição</label>
+                                <label id="Preposicao" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Titulo">Título</label>
+                                <label id="Titulo" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Nome">Nome</label>
+                                <label id="Nome" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Numero">Número</label>
+                                <label id="Numero" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Complemento">Complemento</label>
+                                <label id="Complemento" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Bairro">Bairro</label>
+                                <label id="Bairro" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="Municipio">Município</label>
+                                <label id="Municipio" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="CEP">CEP</label>
+                                <label id="CEP" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="UF">UF</label>
+                                <label id="UF" class="label-detalhar"></label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="clearfix">&nbsp;</div>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label class="control-label" for="DataSMADS">Data Cadastro Baixa Renda</label>
+                                <label id="DataSMADS" class="label-detalhar"></label>
+                            </div>
+                        </div>
+
+
+                        <div id="containerImportacao">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="DataInclusaoImportacao">Data de Inclusão</label>
+                                        <label id="DataInclusaoImportacao" class="label-detalhar"></label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="VersaoImportacao">Versão</label>
+                                        <label id="VersaoImportacao" class="label-detalhar"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="containerManual">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="UsuarioOperacao">Usuário da Operação</label>
+                                    <label id="UsuarioOperacao" class="label-detalhar"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="DataInclusao">Data de Inclusão</label>
+                                    <label id="DataInclusao" class="label-detalhar"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="DataAlteracao">Data de Alteração</label>
+                                    <label id="DataAlteracao" class="label-detalhar"></label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="OrigemCadastro">Origem de Cadastro</label>
+                                    <label id="OrigemCadastro" class="label-detalhar"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="Versao">Versão</label>
+                                    <label id="Versao" class="label-detalhar"></label>
+                                </div>
+                            </div>
+                            @if (Model.SeAdministrador)
+                            {
+                                <div class="col-lg-6 col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label" for="StatusRegistro">Status</label>
+                                        <label id="StatusRegistro" class="label-detalhar"></label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <p class="p-botao">
+                            <button id="btnHistorico" class="btn btn-warning" type="button" data-dismiss="modal" ><span class="icon icon-eye-open"></span>Histórico</button>
+                            <button class="btn btn-warning" type="button" data-dismiss="modal"><span class="icon icon-arrow-left"></span>Voltar</button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,48 @@
+ function montarTabela() {
+        var ordenacao = [[0, 'asc'], [5, 'desc']];
+        castDatatable.criarTabela({
+            idTabela: model.IdTabela,
+            controller: "Smads",
+            serverSide: false,
+            action: "ConsultarSmadsImportacao",
+            order: ordenacao,
+            fnAdicionarDados: function (data) {
+                
+            },
+            fnDrawCallback: function () {
+                $("[aria-label='Status']").removeClass("sorting_disabled").addClass("sorting_asc");
+            },
+            columns: [
+            { mData: 'StatusCodigo', sTitle: '', sWidth: '0%', bSortable: false, visible: false },
+            { mData: 'NomeArquivo', sTitle: 'Nome do Arquivo', sWidth: '40%', bSortable: false },
+            { mData: 'Tamanho', sTitle: 'Tamanho', sWidth: '10%', bSortable: false },
+            { mData: 'Status', sTitle: 'Status', sWidth: '10%', bSortable: false },
+            { mData: 'DataInicioFormatado', sTitle: 'Data Início', sWidth: '15%', bSortable: false },
+            { mData: 'DataFimFormatado', sTitle: 'Data Fim', sWidth: '15%', bSortable: false },
+            {
+                mData: null,
+                sTitle: 'Ação',
+                sWidth: '10%',
+                className: 'text-center',
+                bSortable: false,
+                mRender: function (o, val, objeto) {
+                    var botoes = "";
+                    if (objeto.StatusCodigo > 2) {
+                        if (objeto.InSucesso) {
+                            botoes += '<a onclick="uc013.detalhar(\'' + objeto.Codigo + '\')"><span class="glyphicon glyphicon-search" alt="Detalhar" title="Detalhar"></a>';
+                        } else {
+                            botoes += '<a onclick="uc013.exportar(\'' + objeto.Codigo + '\')" ><img src="../content/img/download.png" alt="Baixar Inconsistências" title="Baixar Inconsistências"></a> ';
+                        }
+                    }
+                    else if (objeto.StatusCodigo == 0) {
+                        botoes += '<a onclick="uc013.importar(\'' + objeto.NomeArquivo + '\')" ><img src="../content/img/importar1.png" alt="Importar" title="Importar"></a> ';
+                        botoes += '<a onclick="uc013.excluir(\'' + objeto.Codigo + '\',\'' + objeto.NomeArquivo + '\')" ><img src="../content/img/deletar.png" alt="Excluir" title="Excluir"></a> ';
+                    } else if (objeto.StatusCodigo == 1) {
+                        botoes += '<a onclick="uc013.excluir(\'' + objeto.Codigo + '\',\'' + objeto.NomeArquivo + '\')" ><img src="../content/img/deletar.png" alt="Excluir" title="Excluir"></a> ';
+                    }
+                    return botoes;
+                }
+            }
+            ]
+        });
+    }

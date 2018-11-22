@@ -1,0 +1,29 @@
+[HttpGet]
+        [Route("ValidarSalvar")]
+        public IList<RetornoDTO> ValidarSalvar(string Instalacao, string InstalacaoAntigo, string TipoPessoa, string DocumentroContribuinte, DateTime DataIncidencia, int? Codigo, string Cep, DateTime DataInicioVigencia)
+        {
+            IList<RetornoDTO> resultado = new List<RetornoDTO>();
+
+            using (var proxy = new CashPowerServiceClient())
+            {
+                bool valido = true;
+                if (DataInicioVigencia > DateTime.Now)
+                {
+                    resultado.Add(new RetornoDTO { MensagemSucesso = "", MensagemErro = MensagensGerais.MS_062, Codigo = 1 });
+                    valido = false;
+                }
+                if (proxy.VerificaDuplicidade(Instalacao, DataIncidencia, Codigo))
+                {
+                    resultado.Add(new RetornoDTO { MensagemSucesso = "", MensagemErro = MensagensGerais.MS_023, Codigo = 1 });
+                    valido = false;
+                }
+                if (valido)
+                {
+                    resultado = proxy.ValidarRegrasNegocio(TipoPessoa, DocumentroContribuinte, Cep);
+                }                  
+            }
+
+            return resultado;
+        }
+
+DocumentoFormatado

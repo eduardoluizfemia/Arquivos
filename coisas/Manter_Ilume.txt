@@ -1,0 +1,297 @@
+@using SF.COSIP.Common.Recursos.Constantes;
+@using SF.COSIP.Common.Recursos.Mensagens;
+@model SF.COSIP.MVC.Intranet.Models.IlumeViewModel
+@{
+    if (Model.SeAlterar)
+    {
+        ViewBag.Title = ViewBag.Title = ConstantesUC012.INTERFACE_TELA_ALTERAR;
+    }
+    else
+    {
+        ViewBag.Title = ViewBag.Title = ConstantesUC012.INTERFACE_TELA_INCLUIR;
+    }
+}
+
+<form role="form" id="formIndex">
+    @Html.HiddenFor(x => x.Ilume.Codigo, new { @id = "hddnCodigo" })
+    @Html.HiddenFor(x => x.Ilume.Instalacao, new { @id = "hddnInstalacao" })
+    @Html.HiddenFor(x => x.Ilume.Origem, new { @id = "hddnOrigem" })
+
+    <div class="row">
+        <div class="col-lg-2 col-md-10 col-sm-8 col-xs-10">
+            <div class="form-group">
+                <label for="txtTid" class="control-label">TID</label>
+                @Html.TextBoxFor(m => m.Ilume.Tid, new { maxlength = 10, @class = "form-control", id = "txtTid" })
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-10 col-sm-8 col-xs-10">
+            <div class="form-group" id="duplicado">
+                <label for="txtInstalacao" class="control-label">* Instalação</label>
+                @Html.TextBoxFor(m => m.Ilume.Instalacao, new { maxlength = 10, @class = "form-control required duplicado", id = "txtInstalacao" })
+            </div>
+        </div>
+        <div class="col-lg-2 col-md-10 col-sm-8 col-xs-10">
+            <div class="form-group">
+                <label for="txtNumeroCliente" class="control-label">* Número Cliente</label>
+                @Html.TextBoxFor(m => m.Ilume.NumeroCliente, new { maxlength = 10, @class = "form-control required", id = "txtNumeroCliente" })
+            </div>
+        </div>
+    </div>
+
+    <fieldset>
+        <legend>Contribuinte</legend>
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+                <div class="form-group">
+                    <label for="drpTipoPessoa" class="control-label">Tipo Pessoa</label>
+                    @Html.DropDownListFor(a => a.Ilume.TipoPessoaImportacao.Codigo, Model.ListaTipoPessoa, "Selecione", new { @class = "form-control", id = "drpTipoPessoa" })
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-10 col-sm-8 col-xs-10">
+                <div class="form-group">
+                    <label for="txtDocumentoContribuinte" class="control-label">CPF / CNPJ / RANI</label>
+                    @Html.TextBoxFor(m => m.Ilume.DocumentoContribuinte, new { @class = "form-control", id = "txtDocumentoContribuinte" })
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="form-group">
+                    <label for="txtNomeContribuinte" class="control-label">* Nome</label>
+                    @Html.TextBoxFor(m => m.Ilume.NomeContribuinte, new { maxlength = 100, @class = "form-control required", id = "txtNomeContribuinte" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <div class="form-group">
+                    <label class="control-label" for="InicioContribuinte">Início Vigência</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(a => a.Ilume.InicioContribuinte, "{0:dd/MM/yyyy}", new { @class = "form-control dateBR", alt = "data", mask = "99/99/9999", id = "InicioContribuinte" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-calendario" type="button">
+                                <span class="icon-calendar"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <div class="form-group">
+                    <label class="control-label" for="FimContribuinte">Fim Vigência</label>
+                    <div class="input-group">
+                        @Html.TextBoxFor(a => a.Ilume.FimContribuinte, "{0:dd/MM/yyyy}", new { @class = "form-control dateBR", alt = "data", mask = "99/99/9999", id = "FimContribuinte" })
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-calendario" type="button">
+                                <span class="icon-calendar"></span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Logradouro</legend>
+        <div class="row">
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label for="drpTipo" class="control-label">Tipo</label>
+                    @Html.DropDownListFor(a => a.Ilume.Endereco.TipoLogradouro.CodigoChar, Model.ListaTipo, "Selecione", new { @class = "form-control", id = "drpTipo" })
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label for="drpPreposicao" class="control-label">Preposição</label>
+                    @Html.DropDownListFor(a => a.Ilume.Endereco.TipoPreposicaoEndereco.Codigo, Model.ListaPreposicao, "Selecione", new { @class = "form-control", id = "drpPreposicao" })
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label for="drpTitulo" class="control-label">Título</label>
+                    @Html.DropDownListFor(a => a.Ilume.Endereco.TipoTituloLogradouro.CodigoChar, Model.ListaTitulo, "Selecione", new { @class = "form-control", id = "drpTitulo" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-md-12">
+                <div class="form-group">
+                    <label for="txtNome" class="control-label">Nome</label>
+                    @Html.TextBoxFor(m => m.Ilume.Endereco.Nome, new { maxlength = 120, @class = "form-control", id = "txtNome" })
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label for="txtNumero" class="control-label">Número</label>
+                    @Html.TextBoxFor(m => m.Ilume.Endereco.Numero, new { maxlength = 5, @class = "form-control", id = "txtNumero" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="form-group">
+                    <label for="txtComplemento" class="control-label">Complemento</label>
+                    @Html.TextBoxFor(m => m.Ilume.Endereco.Complemento, new { maxlength = 80, @class = "form-control", id = "txtComplemento" })
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="form-group">
+                    <label for="txtBairro" class="control-label">Bairro</label>
+                    @Html.TextBoxFor(m => m.Ilume.Endereco.Bairro, new { maxlength = 25, @class = "form-control", id = "txtBairro" })
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-12">
+                <div class="form-group">
+                    <label for="txtMunicipio" class="control-label">Município</label>
+                    @Html.TextBoxFor(m => m.Ilume.Endereco.Municipio, new { maxlength = 25, @class = "form-control", id = "txtMunicipio" })
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label for="txtCEP" class="control-label">CEP</label>
+                    @Html.TextBoxFor(m => m.Ilume.Endereco.Cep, new { @class = "form-control", id = "txtCEP" })
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label for="drpUF" class="control-label">UF</label>
+                    @Html.DropDownListFor(a => a.Ilume.Endereco.Estado.CodigoChar, Model.ListaUF, "Selecione", new { @class = "form-control", id = "drpUF" })
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="row">
+        <div class="col-lg-8 col-md-12">
+            <fieldset>
+                <legend>Subprefeitura</legend>
+                <div class="row">
+                    <div class="col-lg-2 col-md-12">
+                        <div class="form-group">
+                            <label for="txtSubprefeituraCodigo" class="control-label">Código</label>
+                            @Html.TextBoxFor(m => m.Ilume.SubprefeituraCodigo, new { maxlength = 3, @class = "form-control", id = "txtSubprefeituraCodigo" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div class="form-group">
+                            <label for="txtSubprefeituraNome" class="control-label">Nome</label>
+                            @Html.TextBoxFor(m => m.Ilume.SubprefeituraNome, new { maxlength = 30, @class = "form-control", id = "txtSubprefeituraNome" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-lg-4 col-md-2">
+            <fieldset>
+                <legend>Isenção</legend>
+                <div class="row">
+                    <div class="col-lg-6 col-md-2">
+                        <div class="form-group">
+                            <label class="control-label" for="InicioIsencao">Início Vigência</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(a => a.Ilume.InicioIsencao, "{0:dd/MM/yyyy}", new { @class = "form-control dateBR", alt = "data", mask = "99/99/9999", id = "InicioIsencao" })
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary btn-calendario" type="button">
+                                        <span class="icon-calendar"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-2">
+                        <div class="form-group">
+                            <label class="control-label" for="FimIsencao">Fim Vigência</label>
+                            <div class="input-group">
+                                @Html.TextBoxFor(a => a.Ilume.FimIsencao, "{0:dd/MM/yyyy}", new { @class = "form-control dateBR", alt = "data", mask = "99/99/9999", id = "FimIsencao" })
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary btn-calendario" type="button">
+                                        <span class="icon-calendar"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <div class="row">
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+            <div class="form-group">
+                <label for="drpClasse" class="control-label">Classe</label>
+                @Html.DropDownListFor(a => a.Ilume.TipoClasseImportacao.Codigo, Model.ListaClasse, "Selecione", new { @class = "form-control", id = "drpClasse" })
+            </div>
+        </div>
+        @if (Model.SeAlterar)
+        {
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label class="control-label" for="Usuario">Usuário da Operação</label>
+                    <label class="label-detalhar" id="Usuario">@Html.DisplayFor(m => m.Ilume.NomeOperador)</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label class="control-label" for="DataInclusao">Data de Inclusão</label>
+                    <label class="label-detalhar" id="DataInclusao">@Html.DisplayFor(m => m.Ilume.DataInclusaoFormatado)</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label class="control-label" for="DataAlteracao">Data de Alteração</label>
+                    <label class="label-detalhar" id="DataAlteracao">@Html.DisplayFor(m => m.Ilume.DataAlteracaoFormatado)</label>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-12">
+                <div class="form-group">
+                    <label class="control-label" for="Origem">Origem de Cadastro</label>
+                    <label class="label-detalhar" id="Origem">@Html.DisplayFor(m => m.Ilume.Origem)</label>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-12">
+                <div class="form-group">
+                    <label class="control-label" for="Versao">Versão</label>
+                    <label class="label-detalhar" id="Versao">@Html.DisplayFor(m => m.Ilume.Versao)</label>
+                </div>
+            </div>
+            if (Model.SeAdministrador)
+            {
+                <div class="col-lg-1 col-md-12">
+                    <div class="form-group">
+                        <label class="control-label" for="SituacaoRegistroAtivo">Status</label>
+                        <label class="label-detalhar" id="SituacaoRegistroAtivo">@Html.DisplayFor(m => m.Ilume.SituacaoRegistroAtivoFormatado)</label>
+                    </div>
+                </div>
+            }    
+        }
+    </div>
+
+    <p class="p-botao">
+        <button class="btn btn-primary" id="btnSalvar" type="button"><span class="icon icon-save"></span>Salvar</button>
+        <button id="btnLimpar" type="button" class="btn btn-warning"><span class="icon icon-eraser"></span>Limpar</button>
+         @if (Model.SeAlterar)
+        {
+            <button id="btnHistorico" class="btn btn-warning" type="button" data-dismiss="modal" ><span class="icon icon-eye-open"></span>Histórico</button>
+        }
+        <button id="btnVoltar" class="btn btn-warning" type="button"  onclick="location.href='@Url.Action("Index", "Ilume")'" ><span class="glyphicon glyphicon-arrow-left"></span>Voltar</button>
+    </p>
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/script/jqueryMask")
+    @Styles.Render("~/style/bootstrap-datepicker-1.4.0")
+    @Scripts.Render("~/script/bootstrap-datepicker-1.4.0")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ilume/manter.js")"></script>
+    <script type="text/javascript">
+        var mensagens = {
+            MS_024: '@MensagensGerais.MS_024',
+            MS_003: '@MensagensGerais.MS_003',
+            MS_060: '@MensagensGerais.MS_060'
+        };
+    </script>
+}
